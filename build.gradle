@@ -17,6 +17,9 @@ repositories {
 run {
     standardInput = System.in
 }
+dependencies {
+    implementation 'info.picocli:picocli:4.6.3'
+}
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
