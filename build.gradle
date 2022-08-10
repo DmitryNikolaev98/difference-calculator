@@ -19,6 +19,7 @@ run {
 }
 dependencies {
     implementation 'info.picocli:picocli:4.6.3'
+    implementation 'com.google.guava:guava:31.1-jre'
 }
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 group = 'hexlet.code'
