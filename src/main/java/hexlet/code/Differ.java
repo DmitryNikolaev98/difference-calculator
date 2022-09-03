@@ -11,26 +11,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Differ {
     public static String generate(String file1, String file2) throws Exception {
 
-        Map<String, Object> data1 = getJsonFile(file1);
-        Map<String, Object> data2 = getJsonFile(file2);
+        Map<String, Object> fileJson1 = getJsonFile(file1);
+        Map<String, Object> fileJson2 = getJsonFile(file2);
 
         List<Map<String, Object>> result = new ArrayList<>();
 
-        Set<String> keys = new HashSet<>(data1.keySet());
-        keys.addAll(data2.keySet());
+        Set<String> keys = new HashSet<>(fileJson1.keySet());
+        keys.addAll(fileJson2.keySet());
 
         for (String key: keys) {
-            if (!data1.containsKey(key)) {
-                result.add(Map.of("key", key, "value", data2.get(key), "res", "+"));
+            if (!fileJson1.containsKey(key)) {
+                result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
             } else {
-                if (!data2.containsKey(key)) {
-                    result.add(Map.of("key", key, "value", data1.get(key), "res", "-"));
+                if (!fileJson2.containsKey(key)) {
+                    result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
                 } else {
-                    if (data2.get(key).equals(data1.get(key))) {
-                        result.add(Map.of("key", key, "value", data1.get(key), "res", " "));
+                    if (fileJson2.get(key).equals(fileJson1.get(key))) {
+                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", " "));
                     } else {
-                        result.add(Map.of("key", key, "value", data1.get(key), "res", "-"));
-                        result.add(Map.of("key", key, "value", data2.get(key), "res", "+"));
+                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
+                        result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
                     }
                 }
             }

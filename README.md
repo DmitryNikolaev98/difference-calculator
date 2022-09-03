@@ -1,2 +1,1 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/DmitryNikolaev98/java-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions)
+[file comparison](https://asciinema.org/a/6RLnxDdaOHxVNkzZGetXI9erc)
