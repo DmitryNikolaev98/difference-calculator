@@ -1,18 +1,18 @@
 package hexlet.code;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class Differ {
-    public static String generate(String str1, String str2) throws Exception {
+    public static String generate(String file1, String file2) throws Exception {
 
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> data1
-                = mapper.readValue(str1, new TypeReference<Map<String,Object>>(){});
-        Map<String, Object> data2
-                = mapper.readValue(str2, new TypeReference<Map<String,Object>>(){});
+        Map<String, Object> data1 = getJsonFile(file1);
+        Map<String, Object> data2 = getJsonFile(file2);
 
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -36,16 +36,22 @@ public class Differ {
             }
         }
         result = result.stream()
-                .sorted((item1, item2) ->
-                        item1.get("key").toString().compareTo(item2.get("key").toString()))
+                .sorted(Comparator.comparing(item -> item.get("key").toString()))
                 .collect(Collectors.toList());
 
-        String resultStr = "{\n";
-        for (Map<String, Object> item : result) {
-            resultStr = resultStr + item.get("res") + " " + item.get("key") + " " + item.get("value") + "\n";
-        }
+        StringBuilder  resultStr = new StringBuilder("{\n");
 
-        return resultStr + "}";
+        for (Map<String, Object> item : result) {
+            resultStr.append(item.get("res")).append(" ").append(item.get("key")).append(": ").append(item.get("value")).append("\n");
+        }
+        resultStr.append("}");
+
+        return resultStr.toString();
+    }
+    private static Map<String, Object> getJsonFile(String filePath) throws IOException {
+        String jsonString = Files.readString(Paths.get(filePath));
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(jsonString, new TypeReference<>(){});
     }
 
 }
