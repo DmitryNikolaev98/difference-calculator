@@ -61,7 +61,7 @@ public class Differ {
     private static Map<String, Object> getJsonFile(String filePath) throws IOException {
         String jsonString = Files.readString(Paths.get(filePath));
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(jsonString, new TypeReference<>(){
+        return objectMapper.readValue(jsonString, new TypeReference<>() {
         });
     }
 
