@@ -3,7 +3,12 @@ package hexlet.code;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -42,7 +47,12 @@ public class Differ {
         StringBuilder  resultStr = new StringBuilder("{\n");
 
         for (Map<String, Object> item : result) {
-            resultStr.append(item.get("res")).append(" ").append(item.get("key")).append(": ").append(item.get("value")).append("\n");
+            resultStr.append(item.get("res"))
+                    .append(" ")
+                    .append(item.get("key"))
+                    .append(": ")
+                    .append(item.get("value"))
+                    .append("\n");
         }
         resultStr.append("}");
 
@@ -51,7 +61,8 @@ public class Differ {
     private static Map<String, Object> getJsonFile(String filePath) throws IOException {
         String jsonString = Files.readString(Paths.get(filePath));
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(jsonString, new TypeReference<>(){});
+        return objectMapper.readValue(jsonString, new TypeReference<>(){
+        });
     }
 
 }
