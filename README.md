@@ -1,1 +1,3 @@
 [сравнение файлов JSON](https://asciinema.org/a/6RLnxDdaOHxVNkzZGetXI9erc)
+[![Actions Status](https://github.com/DmitryNikolaev98/java-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions)
+[![build](https://github.com/DmitryNikolaev98/java-project-lvl2/actions/workflows/build.yml/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions/workflows/build.yml)
