@@ -1,5 +1,7 @@
+.PHONY: build
+
 run-dist:
-	./build/install/java-project-lvl2/bin/java-project-lvl2 src/test/resources/file1.json src/test/resources/file2.json
+	./build/install/java-project-lvl2/bin/java-project-lvl2
 
 clean:
 	./gradlew clean
@@ -12,5 +14,9 @@ install:
 
 lint:
 	./gradlew checkstyleMain
+
 test:
 	./gradlew test
+
+report:
+	./gradlew jacocoTestReport
