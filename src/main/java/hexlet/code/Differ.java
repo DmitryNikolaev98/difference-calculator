@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Differ {
     public static String generate(String file1, String file2) throws Exception {
 
-        Map<String, Object> fileJson1 = getJsonFile(file1);
-        Map<String, Object> fileJson2 = getJsonFile(file2);
+        Map<String, Object> fileJson1 = getData(file1);
+        Map<String, Object> fileJson2 = getData(file2);
 
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -54,11 +54,27 @@ public class Differ {
 
         return resultStr.toString();
     }
-    private static Map<String, Object> getJsonFile(String filePath) throws IOException {
+   /* private static Map<String, Object> getJsonFile(String filePath) throws IOException {
         String jsonString = Files.readString(Paths.get(filePath));
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(jsonString, new TypeReference<>() {
         });
+    }*/
+
+    public static Map<String, Object> getData(String filePath) throws Exception {
+        String path = generatePathToFile(filePath);
+        String extension = getFileExtension(filePath);
+        return Parser.parserDate(path, extension);
+    }
+
+    public static String getFileExtension(String filePath) {
+        int index = filePath.lastIndexOf('.');
+        return index > 0 ? filePath.substring(index + 1) : "";
+    }
+
+
+    public static String generatePathToFile(String fileName) throws IOException {
+        return Files.readString(Paths.get(fileName).toAbsolutePath().normalize());
     }
 
 }

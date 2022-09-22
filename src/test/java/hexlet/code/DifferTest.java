@@ -7,11 +7,16 @@ import java.nio.file.Paths;
 
 class DifferTest {
 
-    private static final String PATH1 = "src/test/resources/file1.json";
-    private static final String PATH2 = "src/test/resources/file2.json";
+    private static final String FILE_JSON1 = "src/test/resources/file1.json";
+    private static final String FILE_JSON2  = "src/test/resources/file2.json";
 
-    private static String absolutePath1;
-    private static String absolutePath2;
+    private static final String FILE_YAML1  = "src/test/resources/file1.json";
+    private static final String FILE_YAML2 = "src/test/resources/file2.json";
+
+    private static String absolutePathJson1;
+    private static String absolutePathJson2;
+    private static String absolutePathYaml1;
+    private static String absolutePathYaml2;
     private final String expectedTest =
                     "{\n"
                     + "- follow: false\n"
@@ -24,14 +29,21 @@ class DifferTest {
 
     @BeforeAll
     static void preparing() {
-        absolutePath1 = Paths.get(PATH1).toFile().getAbsolutePath();
-        absolutePath2 = Paths.get(PATH2).toFile().getAbsolutePath();
+        absolutePathJson1 = Paths.get(FILE_JSON1).toFile().getAbsolutePath();
+        absolutePathJson2 = Paths.get(FILE_JSON2).toFile().getAbsolutePath();
+        absolutePathYaml1 = Paths.get(FILE_YAML1).toFile().getAbsolutePath();
+        absolutePathYaml2 = Paths.get(FILE_YAML2).toFile().getAbsolutePath();
     }
 
     @Test
-    void runApp() throws Exception {
-        String result = Differ.generate(absolutePath1, absolutePath2);
+    void runTestJson() throws Exception {
+        String result = Differ.generate(absolutePathJson1, absolutePathJson2);
         assertEquals(expectedTest, result);
+    }
 
+    @Test
+    void runTestYaml() throws Exception {
+        String result = Differ.generate(absolutePathYaml1, absolutePathYaml2);
+        assertEquals(expectedTest, result);
     }
 }
