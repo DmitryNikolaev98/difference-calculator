@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/Aljustal/java-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f73b4da10e9c63b09072/maintainability)](https://codeclimate.com/github/DmitryNikolaev98/java-project-lvl2/maintainability)
 [сравнение файлов JSON](https://asciinema.org/a/6RLnxDdaOHxVNkzZGetXI9erc)
 [![Actions Status](https://github.com/DmitryNikolaev98/java-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions)
 [![build](https://github.com/DmitryNikolaev98/java-project-lvl2/actions/workflows/build.yml/badge.svg)](https://github.com/DmitryNikolaev98/java-project-lvl2/actions/workflows/build.yml)

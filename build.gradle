@@ -47,3 +47,7 @@ test {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
+
+checkstyle {
+    toolVersion '9.2.1'
+}

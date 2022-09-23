@@ -27,13 +27,17 @@ public class Differ {
         for (String key: keys) {
             if (!fileJson1.containsKey(key)) {
                 result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
-            } else if (!fileJson2.containsKey(key)) {
-                result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
-            } else if (fileJson2.get(key).equals(fileJson1.get(key))) {
-                result.add(Map.of("key", key, "value", fileJson1.get(key), "res", " "));
             } else {
-                result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
-                result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
+                if (!fileJson2.containsKey(key)) {
+                    result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
+                } else {
+                    if (fileJson2.get(key).equals(fileJson1.get(key))) {
+                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", " "));
+                    } else {
+                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
+                        result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
+                    }
+                }
             }
         }
         result = result.stream()
