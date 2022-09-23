@@ -10,9 +10,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Comparator;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 public class Differ {
     public static String generate(String file1, String file2) throws Exception {
 

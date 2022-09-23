@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parserDate (String data, String extension) throws Exception {
+    public static Map<String, Object> parserDate(String data, String extension) throws Exception {
         switch (extension) {
             case "json" -> {
                 return jsonParse(data);
             }
-            case "yaml","yml" -> {
+            case "yaml", "yml" -> {
                 return yamlParse(data);
             }
             default -> throw new Exception(extension + "is not supported extension");
