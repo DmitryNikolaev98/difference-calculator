@@ -1,52 +1,110 @@
+//plugins {
+//    // Apply the application plugin to add support for building a CLI application in Java.
+//    id ''
+//    id 'application'
+//    id 'checkstyle'
+//    id 'jacoco'
+//    id 'com.adarshr.test-logger' version '3.2.0'
+//}
+//application {
+//    // Define the main class for the application.
+//    mainClass = 'hexlet.code.App'
+//}
+//jacoco {
+//    toolVersion = "0.8.8"
+//    reportsDirectory = layout.buildDirectory.dir('reports/jacoco')
+//}
+//jacocoTestReport {
+//    reports {
+//        xml.required = true
+//        csv.required = false
+//        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+//    }
+//}
+//compileJava {
+//    options.release = 17
+//}
+//repositories {
+//    // Use Maven Central for resolving dependencies.
+//    mavenCentral()
+//}
+//run {
+//    standardInput = System.in
+//}
+//dependencies {
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+//    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.9.0'
+//    testImplementation("org.assertj:assertj-core:3.22.0")
+//    implementation 'info.picocli:picocli:4.6.3'
+//    implementation 'com.ainrif.apiator:jakson-plugin-core-json-renderer:0.15.1'
+//    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.3'
+//
+//}
+//test {
+//    useJUnitPlatform()
+//}
+//java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+//group = 'hexlet.code'
+//version = '1.0-SNAPSHOT'
+//
+//checkstyle {
+//    toolVersion '9.2.1'
+//}
+
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.adarshr.test-logger' version '3.1.0'
+    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
+    id 'com.github.ben-manes.versions' version '0.42.0'
+    id 'io.freefair.lombok' version '6.4.1'
     id 'jacoco'
-    id 'com.adarshr.test-logger' version '3.2.0'
+    id 'net.ltgt.errorprone' version '2.0.2'
 }
-application {
-    // Define the main class for the application.
-    mainClass = 'hexlet.code.App'
+
+group = 'io.hexlet'
+version = '1.0.3-SNAPSHOT'
+
+repositories {
+    mavenCentral()
 }
-jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('reports/jacoco')
-}
-jacocoTestReport {
-    reports {
-        xml.required = true
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-    }
-}
+
 compileJava {
     options.release = 17
 }
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
-run {
-    standardInput = System.in
-}
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.9.0'
-    testImplementation("org.assertj:assertj-core:3.22.0")
-    implementation 'info.picocli:picocli:4.6.3'
-    implementation 'com.ainrif.apiator:jakson-plugin-core-json-renderer:0.15.1'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.3'
 
+application {
+    mainClass = 'io.hexlet.boilerplate.HelloWorld'
 }
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-params:5.8.2',
+            'org.slf4j:slf4j-log4j12:2.0.0-alpha6',
+            'org.assertj:assertj-core:3.22.0'
+    )
+
+    errorprone 'com.google.errorprone:error_prone_core:2.11.0'
+}
+
 test {
     useJUnitPlatform()
 }
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-group = 'hexlet.code'
-version = '1.0-SNAPSHOT'
+
+testlogger {
+    showStandardStreams true
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
 
 checkstyle {
     toolVersion '9.2.1'
