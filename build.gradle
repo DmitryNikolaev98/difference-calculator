@@ -2,54 +2,40 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.adarshr.test-logger' version '3.1.0'
-    id 'se.patrikerdes.use-latest-versions' version '0.2.18'
-    id 'com.github.ben-manes.versions' version '0.42.0'
-    id 'io.freefair.lombok' version '6.4.1'
     id 'jacoco'
-    id 'net.ltgt.errorprone' version '2.0.2'
 }
 
-group = 'io.hexlet'
-version = '1.0.3-SNAPSHOT'
+application {
+    mainClass = 'hexlet.code.App'
+}
+
+group 'hexlet.code'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-compileJava {
-    options.release = 17
-}
-
-application {
-    mainClass = 'io.hexlet.boilerplate.HelloWorld'
-}
-
 dependencies {
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+    implementation 'info.picocli:picocli:4.6.3'
+    annotationProcessor 'info.picocli:picocli-codegen:4.6.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3'
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation 'commons-io:commons-io:2.11.0'
 
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-
-    testImplementation(
-            'org.junit.jupiter:junit-jupiter-params:5.8.2',
-            'org.slf4j:slf4j-log4j12:2.0.0-alpha6',
-            'org.assertj:assertj-core:3.22.0'
-    )
-
-    errorprone 'com.google.errorprone:error_prone_core:2.11.0'
-}
-
-tasks.withType(JavaCompile) {
-    //enable compilation in a separate daemon process
-    options.fork = true
-}
-
-test {
-    useJUnitPlatform()
-}
-
-testlogger {
-    showStandardStreams true
 }
 
 jacocoTestReport {
@@ -58,6 +44,15 @@ jacocoTestReport {
     }
 }
 
-checkstyle {
-    toolVersion '9.2.1'
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+compileJava {
+    options.release = 17
 }
