@@ -1,4 +1,5 @@
 plugins {
+    id 'java'
     id 'application'
     id 'checkstyle'
     id 'com.adarshr.test-logger' version '3.1.0'
@@ -36,6 +37,11 @@ dependencies {
     )
 
     errorprone 'com.google.errorprone:error_prone_core:2.11.0'
+}
+
+tasks.withType(JavaCompile) {
+    //enable compilation in a separate daemon process
+    options.fork = true
 }
 
 test {
