@@ -1,81 +1,65 @@
 package hexlet.code;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
-import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.TreeSet;
+import java.util.Objects;
+
 public class Differ {
-    public static String generate(String file1, String file2) throws Exception {
+    public static String differGenerate(String filepath1, String filepath2, String format)
+            throws Exception {
 
-        Map<String, Object> fileJson1 = getData(file1);
-        Map<String, Object> fileJson2 = getData(file2);
+        Map<String, Object> map1 = Parser.generate(getContent(filepath1), getFileExtension(filepath1));
+        Map<String, Object> map2 = Parser.generate(getContent(filepath2), getFileExtension(filepath2));
 
-        List<Map<String, Object>> result = new ArrayList<>();
+        List<Node> diff = buildDiff(map1, map2);
 
-        Set<String> keys = new HashSet<>(fileJson1.keySet());
-        keys.addAll(fileJson2.keySet());
+        Formatter formatter = new Formatter();
+        return formatter.getDiff(diff, format);
+    }
 
-        for (String key: keys) {
-            if (!fileJson1.containsKey(key)) {
-                result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
+
+    private static String getFileExtension(String filepath) {
+        int lastDotIndex = filepath.lastIndexOf('.');
+        return filepath.substring(lastDotIndex + 1);
+    }
+
+    private static String getContent(String filepath) {
+        final Path fileAbsolutePath = Paths.get(filepath).toAbsolutePath();
+        return String.valueOf(fileAbsolutePath);
+    }
+
+    public static List<Node> buildDiff(Map<String, Object> map1, Map<String, Object> map2) {
+        Set<String> allKeys = new TreeSet<>();
+        allKeys.addAll(map1.keySet());
+        allKeys.addAll(map2.keySet());
+
+        List<Node> allDifferences = new ArrayList<>();
+
+        for (String key: allKeys) {
+            Object valueMap1 = map1.get(key);
+            Object valueMap2 = map2.get(key);
+
+            if (!map2.containsKey(key)) {
+                allDifferences.add(new Node("removed", key, valueMap1, valueMap2));
+            } else if (!map1.containsKey(key))  {
+                allDifferences.add(new Node("added", key, valueMap1, valueMap2));
+            } else if (Objects.equals(valueMap1, valueMap2)) {
+                allDifferences.add(new Node("nothing", key, valueMap1, valueMap2));
             } else {
-                if (!fileJson2.containsKey(key)) {
-                    result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
-                } else {
-                    if (fileJson2.get(key).equals(fileJson1.get(key))) {
-                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", " "));
-                    } else {
-                        result.add(Map.of("key", key, "value", fileJson1.get(key), "res", "-"));
-                        result.add(Map.of("key", key, "value", fileJson2.get(key), "res", "+"));
-                    }
-                }
+                allDifferences.add(new Node("updated", key, valueMap1, valueMap2));
             }
         }
-        result = result.stream()
-                .sorted(Comparator.comparing(item -> item.get("key").toString()))
-                .collect(Collectors.toList());
 
-        StringBuilder  resultStr = new StringBuilder("{\n");
-
-        for (Map<String, Object> item : result) {
-            resultStr.append(item.get("res"))
-                    .append(" ")
-                    .append(item.get("key"))
-                    .append(": ")
-                    .append(item.get("value"))
-                    .append("\n");
-        }
-        resultStr.append("}");
-
-        return resultStr.toString();
-    }
-   /* private static Map<String, Object> getJsonFile(String filePath) throws IOException {
-        String jsonString = Files.readString(Paths.get(filePath));
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(jsonString, new TypeReference<>() {
-        });
-    }*/
-
-    public static Map<String, Object> getData(String filePath) throws Exception {
-        String path = generatePathToFile(filePath);
-        String extension = getFileExtension(filePath);
-        return Parser.parserDate(path, extension);
+        return allDifferences;
     }
 
-    public static String getFileExtension(String filePath) {
-        int index = filePath.lastIndexOf('.');
-        return index > 0 ? filePath.substring(index + 1) : "";
+    public static String generate(String filepath1, String filepath2)
+            throws Exception {
+        return differGenerate(filepath1, filepath2, "stylish");
     }
-
-
-    public static String generatePathToFile(String fileName) throws IOException {
-        return Files.readString(Paths.get(fileName).toAbsolutePath().normalize());
-    }
-
 }

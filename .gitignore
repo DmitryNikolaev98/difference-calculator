@@ -4,12 +4,7 @@
 # Ignore Gradle build output directory
 build
 
-**/logs/
+# IDEA preferences
+.idea
 
-.settings
-bin
-.project*
-.classpath
-.idea/
-out
-codeclimate-master
+**/logs/

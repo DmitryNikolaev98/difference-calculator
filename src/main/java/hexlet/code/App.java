@@ -22,12 +22,13 @@ class App implements Callable<String> {
     @Override
     public String call() throws Exception {
         try {
-            System.out.println(Differ.generate(filepath1, filepath2));
+            System.out.println(Differ.differGenerate(filepath1, filepath2, format));
         } catch (IOException e) {
             System.out.println("Something's gone wrong");
         }
         return "call is working";
     }
+
     public static void main(String[] args) {
         App app = new App();
         int exitCode = new CommandLine(app).execute(args);
