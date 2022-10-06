@@ -20,7 +20,7 @@ class AppTest {
     }
 
     private static String fullPathForFixtureFile(String fileName) {
-        return "src/test/resources/fixtures/" + fileName;
+        return "src/test/resources/formatters/" + fileName;
     }
 
     @Test
