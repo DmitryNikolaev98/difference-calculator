@@ -29,7 +29,7 @@ lint:
 build:
 	./gradlew clean build
 
-# For Jacoco test coverage with CodeClimate in main.yml
+# For Jacoco test coverage with CodeClimate in build-check.yml
 test:
 	./gradlew jacocoTestReport
 

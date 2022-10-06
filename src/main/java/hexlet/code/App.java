@@ -24,7 +24,7 @@ class App implements Callable<String> {
         try {
             System.out.println(Differ.differGenerate(filepath1, filepath2, format));
         } catch (IOException e) {
-            System.out.println("Something's gone wrong");
+            e.printStackTrace();
         }
         return "call is working";
     }

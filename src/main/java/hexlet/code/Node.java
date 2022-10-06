@@ -6,11 +6,11 @@ public class Node {
     private final Object value1;
     private final Object value2;
 
-    public Node(String changesStyle, String key, Object value1, Object value2) {
+    public Node(String changesStyle, String newKey, Object newValue1, Object newValue2) {
         this.style = changesStyle;
-        this.key = key;
-        this.value1 = value1;
-        this.value2 = value2;
+        this.key = newKey;
+        this.value1 = newValue1;
+        this.value2 = newValue2;
     }
     public final String getChangesType() {
         return style;
