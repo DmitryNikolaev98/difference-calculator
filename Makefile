@@ -30,7 +30,7 @@ build:
 	./gradlew clean build
 
 # For Jacoco test coverage with CodeClimate in build-check.yml
-test:
+report:
 	./gradlew jacocoTestReport
 
 .PHONY: build

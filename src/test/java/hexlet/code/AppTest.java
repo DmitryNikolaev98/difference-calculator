@@ -29,7 +29,7 @@ class AppTest {
         String actualYmls = Differ.generate(YML_FILE_1, YML_FILE_2);
 
         String stylishPath = fullPathForFixtureFile(stylishFormat);
-        String expected = Files.readString(Paths.get(stylishPath));
+        String expected = Files.readString(Paths.get(stylishPath)).replaceAll("\\r", "");
 
         Assertions.assertEquals(expected, actualJsons);
         Assertions.assertEquals(expected, actualYmls);
@@ -41,7 +41,7 @@ class AppTest {
         String actualYmls = Differ.differGenerate(YML_FILE_1, YML_FILE_2, stylishFormat);
 
         String stylishPath = fullPathForFixtureFile(stylishFormat);
-        String expected = Files.readString(Paths.get(stylishPath));
+        String expected = Files.readString(Paths.get(stylishPath)).replaceAll("\\r", "");
 
         Assertions.assertEquals(expected, actualJsons);
         Assertions.assertEquals(expected, actualYmls);
