@@ -15,28 +15,28 @@ public class Stylish {
             Object value2 = pair.getValue2();
             String changesType = pair.getChangesType();
 
-            if (changesType.equals("result1")) {
+            if (changesType.equals("deleted")) {
                 diff.append("  - ")
                         .append(key)
                         .append(": ")
                         .append(value1)
                         .append("\n");
             }
-            if (changesType.equals("result2")) {
+            if (changesType.equals("added")) {
                 diff.append("  + ")
                         .append(key)
                         .append(": ")
                         .append(value2)
                         .append("\n");
             }
-            if (changesType.equals("result3")) {
+            if (changesType.equals("noChanges")) {
                 diff.append("    ")
                         .append(key)
                         .append(": ")
                         .append(value1)
                         .append("\n");
             }
-            if (changesType.equals("result4")) {
+            if (changesType.equals("modified")) {
                 diff.append("  - ")
                         .append(key)
                         .append(": ")

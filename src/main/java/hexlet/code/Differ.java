@@ -45,13 +45,13 @@ public class Differ {
             Object valueMap2 = map2.get(key);
 
             if (!map2.containsKey(key)) {
-                allDifferences.add(new Node("result1", key, valueMap1, valueMap2));
+                allDifferences.add(new Node("deleted", key, valueMap1, valueMap2));
             } else if (!map1.containsKey(key))  {
-                allDifferences.add(new Node("result2", key, valueMap1, valueMap2));
+                allDifferences.add(new Node("added", key, valueMap1, valueMap2));
             } else if (Objects.equals(valueMap1, valueMap2)) {
-                allDifferences.add(new Node("result3", key, valueMap1, valueMap2));
+                allDifferences.add(new Node("noChanges", key, valueMap1, valueMap2));
             } else {
-                allDifferences.add(new Node("result4", key, valueMap1, valueMap2));
+                allDifferences.add(new Node("modified", key, valueMap1, valueMap2));
             }
         }
 
