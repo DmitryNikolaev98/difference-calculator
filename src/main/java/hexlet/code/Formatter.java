@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
@@ -11,6 +12,7 @@ public class Formatter {
         return switch (format) {
             case ("stylish") -> Stylish.getFormated(allDifferences);
             case ("plain") -> Plain.getFormated(allDifferences);
+            case ("json") -> Json.getFormated(allDifferences);
             default -> "Unexpected format: " + format;
         };
     }

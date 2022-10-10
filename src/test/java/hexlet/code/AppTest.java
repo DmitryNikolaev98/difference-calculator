@@ -15,6 +15,7 @@ class AppTest {
 
     private final String stylishFormat = "stylish";
     private final String plainFormat = "plain";
+    private final String jsonFormat = "json";
 
     private static String makeFullPathForTestFile(String fileName) {
         return "src/test/resources/" + fileName;
@@ -55,6 +56,18 @@ class AppTest {
 
         String plainPath = fullPathForFixtureFile(plainFormat);
         String expected = Files.readString(Paths.get(plainPath)).replaceAll("\\r", "");
+
+        Assertions.assertEquals(expected, actualJsons);
+        Assertions.assertEquals(expected, actualYmls);
+    }
+
+    @Test
+    void filesJson() throws Exception {
+        String actualJsons = Differ.differGenerate(JSON_FILE_1, JSON_FILE_2, jsonFormat);
+        String actualYmls = Differ.differGenerate(YML_FILE_1, YML_FILE_2, jsonFormat);
+
+        String jsonPath = fullPathForFixtureFile(jsonFormat);
+        String expected = Files.readString(Paths.get(jsonPath)).replaceAll("\\r", "");
 
         Assertions.assertEquals(expected, actualJsons);
         Assertions.assertEquals(expected, actualYmls);
