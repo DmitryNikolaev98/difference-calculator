@@ -16,6 +16,11 @@ application {
     mainClass = 'hexlet.code.App'
 }
 
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
 compileJava {
     options.release = 17
 }
