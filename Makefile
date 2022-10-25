@@ -1,20 +1,20 @@
 install:
-	./gradlew clean install
+	cd app && ./gradlew clean install
 
 check-updates:
-	./gradlew dependencyUpdates
+	cd app && ./gradlew dependencyUpdates
 
 run:
-	./gradlew clean
-	./gradlew run
+	cd app && ./gradlew clean
+	cd app && ./gradlew run
 
 lint:
-	./gradlew checkstyleMain
+	cd app && ./gradlew checkstyleMain
 
 build:
-	./gradlew clean build
+	cd app && ./gradlew clean build
 
 report:
-	./gradlew jacocoTestReport
+	cd app && ./gradlew jacocoTestReport
 
 .PHONY: build
