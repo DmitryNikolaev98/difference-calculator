@@ -4,7 +4,6 @@ package hexlet.code;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import java.io.FileReader;
 import java.util.Map;
 
 public class Parser {
@@ -15,6 +14,6 @@ public class Parser {
             default -> throw new Exception("Unexpected format: " + contentType);
         };
 
-        return mapper.readValue(new FileReader(content), new TypeReference<>() { });
+        return mapper.readValue(content, new TypeReference<>() { });
     }
 }

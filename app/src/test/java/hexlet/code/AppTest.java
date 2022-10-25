@@ -39,8 +39,8 @@ class AppTest {
 
     @Test
     void filesStylish() throws Exception {
-        String actualJsons = Differ.differGenerate(JSON_FILE_1, JSON_FILE_2, stylishFormat);
-        String actualYmls = Differ.differGenerate(YML_FILE_1, YML_FILE_2, stylishFormat);
+        String actualJsons = Differ.generate(JSON_FILE_1, JSON_FILE_2, stylishFormat);
+        String actualYmls = Differ.generate(YML_FILE_1, YML_FILE_2, stylishFormat);
 
         String stylishPath = fullPathForFixtureFile(stylishFormat);
         String expected = Files.readString(Paths.get(stylishPath)).replaceAll("\\r", "");
@@ -51,8 +51,8 @@ class AppTest {
 
     @Test
     void filesPlain() throws Exception {
-        String actualJsons = Differ.differGenerate(JSON_FILE_1, JSON_FILE_2, plainFormat);
-        String actualYmls = Differ.differGenerate(YML_FILE_1, YML_FILE_2, plainFormat);
+        String actualJsons = Differ.generate(JSON_FILE_1, JSON_FILE_2, plainFormat);
+        String actualYmls = Differ.generate(YML_FILE_1, YML_FILE_2, plainFormat);
 
         String plainPath = fullPathForFixtureFile(plainFormat);
         String expected = Files.readString(Paths.get(plainPath)).replaceAll("\\r", "");
@@ -63,8 +63,8 @@ class AppTest {
 
     @Test
     void filesJson() throws Exception {
-        String actualJsons = Differ.differGenerate(JSON_FILE_1, JSON_FILE_2, jsonFormat);
-        String actualYmls = Differ.differGenerate(YML_FILE_1, YML_FILE_2, jsonFormat);
+        String actualJsons = Differ.generate(JSON_FILE_1, JSON_FILE_2, jsonFormat);
+        String actualYmls = Differ.generate(YML_FILE_1, YML_FILE_2, jsonFormat);
 
         String jsonPath = fullPathForFixtureFile(jsonFormat);
         String expected = Files.readString(Paths.get(jsonPath)).replaceAll("\\r", "");

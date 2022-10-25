@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.TreeSet;
 import java.util.Objects;
 
 public class Differ {
-    public static String differGenerate(String filepath1, String filepath2, String format)
+    public static String generate(String filepath1, String filepath2, String format)
             throws Exception {
 
         Map<String, Object> map1 = Parser.generate(getContent(filepath1), getFileExtension(filepath1));
@@ -28,9 +30,9 @@ public class Differ {
         return filepath.substring(lastIndex + 1);
     }
 
-    private static String getContent(String filepath) {
+    private static String getContent(String filepath) throws IOException {
         final Path fileAbsolutePath = Paths.get(filepath).toAbsolutePath();
-        return String.valueOf(fileAbsolutePath);
+        return Files.readString(fileAbsolutePath);
     }
 
     public static List<Node> buildDiff(Map<String, Object> map1, Map<String, Object> map2) {
@@ -60,6 +62,6 @@ public class Differ {
 
     public static String generate(String filepath1, String filepath2)
             throws Exception {
-        return differGenerate(filepath1, filepath2, "stylish");
+        return generate(filepath1, filepath2, "stylish");
     }
 }

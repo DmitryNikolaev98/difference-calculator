@@ -21,11 +21,8 @@ class App implements Callable {
 
     @Override
     public String call() throws Exception {
-        try {
-            System.out.println(Differ.differGenerate(filepath1, filepath2, format));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String callDiffer = Differ.generate(filepath1, filepath2, format);
+        System.out.println(callDiffer);
         return null;
     }
 
